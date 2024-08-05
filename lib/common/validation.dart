@@ -17,3 +17,10 @@ String? validatePassword(String? value) {
   }
   return null;
 }
+
+String? validateFullName(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Please enter your full name';
+  }
+  return null;
+}

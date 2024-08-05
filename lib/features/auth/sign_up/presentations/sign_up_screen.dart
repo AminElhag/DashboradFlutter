@@ -2,23 +2,23 @@ import 'package:dashborad/common/extension.dart';
 import 'package:dashborad/common/validation.dart';
 import 'package:dashborad/common_widget/info_text_field.dart';
 import 'package:dashborad/common_widget/round_button.dart';
-import 'package:dashborad/features/auth/sign_up/presentations/sign_up_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   static route() => MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
+        builder: (context) => const SignUpScreen(),
       );
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -56,19 +56,41 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(
                         height: 32,
                       ),
-                      const Text(
-                        "Welcome back!",
-                        style: TextStyle(fontSize: 18.0),
+                      SizedBox(
+                        width: 300,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Get Started with ",
+                              style: TextStyle(fontSize: 18.0),
+                            ),
+                            Text(
+                              "DashBoard",
+                              style: TextStyle(
+                                  fontSize: 18.0,
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(
                         height: 16,
                       ),
                       const Text(
-                        "Login to youe account",
+                        "Create your account",
                         style: TextStyle(fontSize: 10.0, color: Colors.grey),
                       ),
                       const SizedBox(
                         height: 32,
+                      ),
+                      InfoTextField(
+                        textEditorController: _fullNameController,
+                        hintText: "Your Full Name",
+                        inputType: TextInputType.emailAddress,
+                        validator: validateFullName,
+                        hasPrefixIcon: true,
+                        prefixIcon: Icons.person_2_outlined,
                       ),
                       InfoTextField(
                         textEditorController: _emailController,
@@ -90,22 +112,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         suffixOffIcon: Icons.lock_outline,
                         suffixOnIcon: Icons.lock_outline,
                       ),
-                      SizedBox(
-                        width: 300,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "Recover Password",
-                                  style: TextStyle(
-                                      fontSize: 10,
-                                      color: Theme.of(context).primaryColor),
-                                ))
-                          ],
-                        ),
-                      ),
                       const SizedBox(
                         height: 20,
                       ),
@@ -114,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text("Don't have an account? ",
+                            const Text("Already have an account? ",
                                 style: TextStyle(fontSize: 10)),
                             GestureDetector(
                               onTap: () {
@@ -122,10 +128,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 if (kDebugMode) {
                                   print("Navigate to sign-up");
                                 }
-                                Navigator.push(context, SignUpScreen.route());
+                                Navigator.pop(context);
                               },
                               child: Text(
-                                "Sign up",
+                                "Login",
                                 style: TextStyle(
                                     color: Theme.of(context).primaryColor,
                                     fontSize: 10),
@@ -145,8 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (_formKey.currentState!.validate()) {
                                 // Process valid email and password
                                 if (kDebugMode) {
-                                  print(
-                                      "Valid email: ${_emailController.text}");
+                                  print("Valid email: ${_emailController.text}");
                                   print(
                                       "Valid password: ${_passwordController.text}");
                                 }
