@@ -1,5 +1,8 @@
 import 'package:dashborad/common/extension.dart';
 import 'package:dashborad/common/validation.dart';
+import 'package:dashborad/common_widget/info_text_field.dart';
+import 'package:dashborad/common_widget/round_button.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,7 +16,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isShowPassword = false;
 
   @override
   void dispose() {
@@ -48,101 +50,39 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 32,
                     ),
-                    Text(
+                    const Text(
                       "Welcome back!",
                       style: TextStyle(fontSize: 18.0),
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    Text(
+                    const Text(
                       "Login to youe account",
                       style: TextStyle(fontSize: 10.0, color: Colors.grey),
                     ),
                     const SizedBox(
                       height: 32,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        width: 300,
-                        child: TextFormField(
-                          controller: _emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.grey.shade50,
-                            hintText: "Email Address",
-                            hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12),
-                            prefixIcon: Icon(
-                              Icons.email_outlined,
-                              color: Colors.black.withAlpha(80),
-                              size: 20,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                          validator: validateEmail,
-                        ),
-                      ),
+                    InfoTextField(
+                      textEditorController: _emailController,
+                      hintText: "Email Address",
+                      inputType: TextInputType.emailAddress,
+                      validator: validateEmail,
+                      hasPrefixIcon: true,
+                      prefixIcon: Icons.email_outlined,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        width: 300,
-                        child: TextFormField(
-                          controller: _passwordController,
-                          keyboardType: TextInputType.text,
-                          obscureText: !_isShowPassword,
-                          decoration: InputDecoration(
-                            hintText: "Password",
-                            filled: true,
-                            fillColor: Colors.grey.shade50,
-                            hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12),
-                            prefixIcon: Icon(
-                              Icons.lock_outline,
-                              color: Colors.black.withAlpha(80),
-                              size: 20,
-                            ),
-                            suffixIcon: (_isShowPassword)
-                                ? IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _isShowPassword = !_isShowPassword;
-                                      });
-                                    },
-                                    icon: Icon(
-                                      Icons.lock_outline,
-                                      color: Colors.black.withAlpha(80),
-                                      size: 20,
-                                    ))
-                                : IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _isShowPassword = !_isShowPassword;
-                                      });
-                                    },
-                                    icon: Icon(
-                                      Icons.remove_red_eye,
-                                      color: Colors.black.withAlpha(80),
-                                      size: 20,
-                                    )),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                          validator: validatePassword,
-                        ),
-                      ),
+                    InfoTextField(
+                      textEditorController: _passwordController,
+                      hintText: "Password",
+                      inputType: TextInputType.text,
+                      validator: validatePassword,
+                      hasPrefixIcon: true,
+                      prefixIcon: Icons.lock_outline,
+                      hasSuffixIcon: true,
+                      hasSuffixActions: true,
+                      suffixOffIcon: Icons.lock_outline,
+                      suffixOnIcon: Icons.lock_outline,
                     ),
                     SizedBox(
                       width: 300,
@@ -168,12 +108,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Don't have an account? ",
+                          const Text("Don't have an account? ",
                               style: TextStyle(fontSize: 10)),
                           GestureDetector(
                             onTap: () {
                               // Navigate to sign-up screen
-                              print("Navigate to sign-up");
+                              if (kDebugMode) {
+                                print("Navigate to sign-up");
+                              }
                             },
                             child: Text(
                               "Sign up",
@@ -190,30 +132,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(
                       width: 200,
-                      child: MaterialButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            // Process valid email and password
-                            print("Valid email: ${_emailController.text}");
-                            print(
-                                "Valid password: ${_passwordController.text}");
-                          }
-                        },
-                        minWidth: double.maxFinite,
-                        elevation: 0,
-                        color: Theme.of(context).primaryColor,
-                        height: 50,
-                        shape: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
+                      child: RoundButton(
+                          title: "Login",
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              // Process valid email and password
+                              if (kDebugMode) {
+                                print("Valid email: ${_emailController.text}");
+                                print(
+                                    "Valid password: ${_passwordController.text}");
+                              }
+                            }
+                          },
+                          backgroundColor: Theme.of(context).primaryColor,
+                          titleColor: Colors.white),
                     ),
                     const SizedBox(
                       height: 20,
