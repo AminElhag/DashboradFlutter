@@ -1,3 +1,4 @@
+import 'package:dashborad/features/monitor/presentations/monitor_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sidebarx/sidebarx.dart';
 
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (!isSmallScreen) ExampleSidebarX(controller: _controller),
           Expanded(
             child: Center(
-              child: _ScreensExample(
+              child: _SelectScreens(
                 controller: _controller,
               ),
             ),
@@ -177,15 +178,14 @@ class ExampleSidebarX extends StatelessWidget {
         return SizedBox(
           height: 120,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 6),
+            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 6),
             child: (extended)
                 ? Column(
                     children: [
                       FilledButton(
                         onPressed: () {},
                         style: FilledButton.styleFrom(
-                          backgroundColor:
-                          Theme.of(context)
+                          backgroundColor: Theme.of(context)
                               .buttonTheme
                               .colorScheme!
                               .surfaceContainerHigh,
@@ -193,71 +193,98 @@ class ExampleSidebarX extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.headphones_outlined,color: Theme.of(context)
-                                .buttonTheme
-                                .colorScheme!
-                                .onSurface,),
-                            const SizedBox(width: 6,),
+                            Icon(
+                              Icons.headphones_outlined,
+                              color: Theme.of(context)
+                                  .buttonTheme
+                                  .colorScheme!
+                                  .onSurface,
+                            ),
+                            const SizedBox(
+                              width: 6,
+                            ),
                             Text("Contact Support",
                                 style: Theme.of(context).textTheme.bodySmall)
                           ],
                         ),
                       ),
-                      const SizedBox(height: 6,),
+                      const SizedBox(
+                        height: 6,
+                      ),
                       FilledButton(
                         onPressed: () {},
                         style: FilledButton.styleFrom(
-                          backgroundColor:
-                          Colors.transparent
-                        ),
+                            backgroundColor: Colors.transparent),
                         child: Row(
                           children: [
-                            Icon(Icons.output,color: Theme.of(context)
-                                .buttonTheme
-                                .colorScheme!
-                                .error,),
-                            const SizedBox(width: 6,),
+                            Icon(
+                              Icons.output,
+                              color: Theme.of(context)
+                                  .buttonTheme
+                                  .colorScheme!
+                                  .error,
+                            ),
+                            const SizedBox(
+                              width: 6,
+                            ),
                             Text("Logout",
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context)
-                                    .buttonTheme
-                                    .colorScheme!
-                                    .error))
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                        color: Theme.of(context)
+                                            .buttonTheme
+                                            .colorScheme!
+                                            .error))
                           ],
                         ),
                       ),
                     ],
                   )
                 : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  style: FilledButton.styleFrom(
-                    backgroundColor:
-                    Theme.of(context)
-                        .buttonTheme
-                        .colorScheme!
-                        .surfaceContainerHigh,
-                    shape: const CircleBorder()
-                  ), icon: Icon(Icons.headphones_outlined,color: Theme.of(context)
-                    .buttonTheme
-                    .colorScheme!
-                    .onSurface,),
-                ),
-                const SizedBox(height: 6,),
-                IconButton(
-                  onPressed: () {},
-                  style: FilledButton.styleFrom(
-                      backgroundColor:
-                      Colors.transparent
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        style: FilledButton.styleFrom(
+                            backgroundColor: Theme.of(context)
+                                .buttonTheme
+                                .colorScheme!
+                                .surfaceContainerHigh,
+                            shape: const CircleBorder()),
+                        icon: Icon(
+                          Icons.headphones_outlined,
+                          color: Theme.of(context)
+                              .buttonTheme
+                              .colorScheme!
+                              .onSurface,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'You logout',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              backgroundColor: Colors.white,
+                            ),
+                          );
+                        },
+                        style: FilledButton.styleFrom(
+                            backgroundColor: Colors.transparent),
+                        icon: Icon(
+                          Icons.output,
+                          color:
+                              Theme.of(context).buttonTheme.colorScheme!.error,
+                        ),
+                      ),
+                    ],
                   ),
-                  icon: Icon(Icons.output,color: Theme.of(context)
-                      .buttonTheme
-                      .colorScheme!
-                      .error,),
-                ),
-              ],
-            ),
           ),
         );
       },
@@ -277,11 +304,11 @@ class ExampleSidebarX extends StatelessWidget {
   }
 }
 
-class _ScreensExample extends StatelessWidget {
-  const _ScreensExample({
-    Key? key,
+class _SelectScreens extends StatelessWidget {
+  const _SelectScreens({
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   final SidebarXController controller;
 
@@ -294,23 +321,15 @@ class _ScreensExample extends StatelessWidget {
         final pageTitle = _getTitleByIndex(controller.selectedIndex);
         switch (controller.selectedIndex) {
           case 0:
-            return ListView.builder(
-              padding: const EdgeInsets.only(top: 10),
-              itemBuilder: (context, index) => Container(
-                height: 100,
-                width: double.infinity,
-                margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Theme.of(context).canvasColor,
-                  boxShadow: const [BoxShadow()],
+            return const MonitorScreen();
+          default:
+            return Scaffold(
+              appBar: AppBar(
+                leading: Text(
+                  pageTitle,
+                  style: theme.textTheme.headlineSmall,
                 ),
               ),
-            );
-          default:
-            return Text(
-              pageTitle,
-              style: theme.textTheme.headlineSmall,
             );
         }
       },
