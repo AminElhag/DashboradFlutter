@@ -2,6 +2,7 @@ import 'package:dashborad/common/extension.dart';
 import 'package:dashborad/common/validation.dart';
 import 'package:dashborad/common_widget/info_text_field.dart';
 import 'package:dashborad/common_widget/round_button.dart';
+import 'package:dashborad/features/home/presentations/home_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -151,10 +152,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               if (_formKey.currentState!.validate()) {
                                 // Process valid email and password
                                 if (kDebugMode) {
-                                  print("Valid email: ${_emailController.text}");
+                                  print(
+                                      "Valid email: ${_emailController.text}");
                                   print(
                                       "Valid password: ${_passwordController.text}");
                                 }
+                                Navigator.push(context, HomeScreen.route());
                               }
                             },
                             backgroundColor: Theme.of(context).primaryColor,
