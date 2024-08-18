@@ -1,4 +1,4 @@
-import 'package:dashborad/common_model/user_model.dart';
+import 'package:dashborad/common_model/customer_model.dart';
 import 'package:flutter/material.dart';
 
 enum OrderStatus {
@@ -66,7 +66,7 @@ enum OrderType {
 class OrderModel {
   final String id;
   final String date;
-  final UserModel user;
+  final CustomerModel user;
   final double price;
   final int status;
   final int type;

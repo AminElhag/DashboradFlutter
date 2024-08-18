@@ -1,23 +1,25 @@
 import 'dart:math';
 
 import 'package:dashborad/common/extension.dart';
-import 'package:dashborad/common_model/order_model.dart';
 import 'package:dashborad/common_model/customer_model.dart';
+import 'package:dashborad/common_model/order_model.dart';
+import 'package:dashborad/common_widget/customer_row.dart';
 import 'package:dashborad/common_widget/dashboard_summary_chip_card.dart';
 import 'package:dashborad/common_widget/order_row.dart';
 import 'package:flutter/material.dart';
 
-class OrderScreen extends StatefulWidget {
-  const OrderScreen({super.key});
+class CustomersScreen extends StatefulWidget {
+  const CustomersScreen({super.key});
 
   @override
-  State<OrderScreen> createState() => _OrderScreenState();
+  State<CustomersScreen> createState() => _CustomersScreenState();
 }
 
-class _OrderScreenState extends State<OrderScreen> {
+class _CustomersScreenState extends State<CustomersScreen> {
   final List<String> _items = ['This Week', 'This Day', 'This Month'];
   bool _isChecked = false;
-  final List<int> _pages = [1,2,4,5,6,7,8,9,10];
+  final List<int> _pages = [1, 2, 4, 5, 6, 7, 8, 9, 10];
+
   @override
   Widget build(BuildContext context) {
     int selectedItem = _pages.first;
@@ -30,9 +32,9 @@ class _OrderScreenState extends State<OrderScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Order Summary"),
+                const Text("Customers Summary"),
                 FilledButton(
-                    onPressed: () {}, child: const Text("+ Create a new order"))
+                    onPressed: () {}, child: const Text("+ Add a new customer"))
               ],
             ),
             const SizedBox(
@@ -46,37 +48,27 @@ class _OrderScreenState extends State<OrderScreen> {
                 DashboardSummaryChipCard(
                   items: _items,
                   flex: 3,
-                  iconData: Icons.sell_outlined,
-                  firstFrameTitle: "All Orders",
+                  iconData: Icons.people_alt_outlined,
+                  firstFrameTitle: "All Customers",
                   firstFrameValue: 0,
-                  secondFrameTitle: "Pending",
+                  secondFrameTitle: "Active",
                   secondFrameValue: 0,
                   hasThirdFrame: true,
-                  thirdFrameTitle: "Completed",
+                  thirdFrameTitle: "In-Active",
                   thirdFrameValue: 0,
                   onOrderTypeChange: (p0) {},
                 ),
                 DashboardSummaryChipCard(
                   items: _items,
                   flex: 3,
-                  iconData: Icons.sell_outlined,
-                  firstFrameTitle: "Canceled",
+                  iconData: Icons.shopping_bag_outlined,
+                  firstFrameTitle: "New Customers",
                   firstFrameValue: 0,
-                  secondFrameTitle: "Returned",
+                  secondFrameTitle: "Purchasing",
                   secondFrameValue: 0,
                   hasThirdFrame: true,
-                  thirdFrameTitle: "Damaged",
+                  thirdFrameTitle: "Abandoned Carts",
                   thirdFrameValue: 0,
-                  onOrderTypeChange: (p0) {},
-                ),
-                DashboardSummaryChipCard(
-                  items: _items,
-                  flex: 2,
-                  iconData: Icons.shopping_cart_outlined,
-                  firstFrameTitle: "Abandoned Cart",
-                  firstFrameValue: 0,
-                  secondFrameTitle: "Customers",
-                  secondFrameValue: 0,
                   onOrderTypeChange: (p0) {},
                 ),
                 const SizedBox(
@@ -101,7 +93,7 @@ class _OrderScreenState extends State<OrderScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text("Customers Orders"),
+                          const Text("Customers"),
                           const Spacer(),
                           Row(
                             children: [
@@ -236,7 +228,7 @@ class _OrderScreenState extends State<OrderScreen> {
                         ),
                         Row(
                           children: [
-                            const Text("Order Date"),
+                            const Text("Email"),
                             const SizedBox(
                               width: 10,
                             ),
@@ -251,7 +243,7 @@ class _OrderScreenState extends State<OrderScreen> {
                         ),
                         Row(
                           children: [
-                            const Text("Order Type"),
+                            const Text("Phone"),
                             const SizedBox(
                               width: 10,
                             ),
@@ -266,7 +258,7 @@ class _OrderScreenState extends State<OrderScreen> {
                         ),
                         Row(
                           children: [
-                            const Text("Tracking ID"),
+                            const Text("Order"),
                             const SizedBox(
                               width: 10,
                             ),
@@ -281,7 +273,7 @@ class _OrderScreenState extends State<OrderScreen> {
                         ),
                         Row(
                           children: [
-                            const Text("Order Totlal"),
+                            const Text("Order Total"),
                             const SizedBox(
                               width: 10,
                             ),
@@ -296,7 +288,7 @@ class _OrderScreenState extends State<OrderScreen> {
                         ),
                         Row(
                           children: [
-                            const Text("Action"),
+                            const Text("Customer Since"),
                             const SizedBox(
                               width: 10,
                             ),
@@ -339,24 +331,23 @@ class _OrderScreenState extends State<OrderScreen> {
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return OrderRow(
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: CustomerRow(
                             isChecked: false,
-                            order: OrderModel(
-                                id: "123456789",
-                                date: "2024-07-14T11:50:19.213921Z",
-                                user: CustomerModel(
-                                  id: "1234",
-                                  fullName: "Amin Galal",
-                                  email: "mail@mail.com",
-                                  phone: "+249912345678",
-                                  createdAt: "2024-07-14T11:50:19.213921Z",
-                                  totalSpend: 4520,
-                                  numberOfOrders: 25,
-                                  status: Random().nextInt(5),
-                                ),
-                                price: 459.16,
-                                status: Random().nextInt(4),
-                                type: Random().nextInt(2)));
+                            customer: CustomerModel(
+                              id: "1234",
+                              fullName: "Amin Galal",
+                              email: "mail@mail.com",
+                              phone: "+249912345678",
+                              createdAt: "2024-07-14T11:50:19.213921Z",
+                              totalSpend: 4520,
+                              numberOfOrders: 25,
+                              status: Random().nextInt(5),
+                            ),
+                          ),
+                        );
+
                       },
                     ),
                     const Divider(),
@@ -367,11 +358,14 @@ class _OrderScreenState extends State<OrderScreen> {
                         Container(
                           width: 70,
                           decoration: BoxDecoration(
-                              color:
-                              Theme.of(context).colorScheme.outline.withOpacity(0.2),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .outline
+                                  .withOpacity(0.2),
                               borderRadius: BorderRadius.circular(15)),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
                             child: DropdownButtonFormField(
                               isExpanded: true,
                               focusColor: Colors.transparent,
@@ -385,7 +379,8 @@ class _OrderScreenState extends State<OrderScreen> {
                                   value: item,
                                   child: Text(
                                     item.toString(),
-                                    style: const TextStyle(fontWeight: FontWeight.w300),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w300),
                                   ),
                                 );
                               }).toList(),
@@ -397,14 +392,27 @@ class _OrderScreenState extends State<OrderScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 2,),
+                        const SizedBox(
+                          width: 2,
+                        ),
                         Text("of ${_pages.last} pages"),
-                        const SizedBox(width: 16,),
-                        const Icon(Icons.arrow_back_ios,size: 12,),
-                        const SizedBox(width: 2,),
-                        const Icon(Icons.arrow_forward_ios,size: 12,),
-                        const SizedBox(width: 16,),
-
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        const Icon(
+                          Icons.arrow_back_ios,
+                          size: 12,
+                        ),
+                        const SizedBox(
+                          width: 2,
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 12,
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
                       ],
                     )
                   ],
