@@ -13,6 +13,8 @@ enum OrderStatus {
 
   int getId() => id;
 
+  static List<String> getAllStatus() => ["New","Pending","Completed","Canceled"];
+
   static String getOrderStatus(int id) {
     if (OrderStatus.newOrder.id == id) {
       return "New";
@@ -42,24 +44,46 @@ enum OrderStatus {
   }
 }
 
+enum OrderType {
+  homeDelivery(id: 0),
+  pickUp(id: 1);
+
+  final int id;
+
+  const OrderType({required this.id});
+
+  static String getOrderType(int id) {
+    if (OrderType.homeDelivery.id == id) {
+      return "Home Delivery";
+    } else if (OrderType.pickUp.id == id) {
+      return "Pick Up";
+    } else {
+      return "";
+    }
+  }
+}
+
 class OrderModel {
   final String id;
   final String date;
   final UserModel user;
   final double price;
   final int status;
+  final int type;
 
   OrderModel(
       {required this.id,
       required this.date,
       required this.user,
       required this.price,
-      required this.status});
+      required this.status,
+      required this.type});
 
   factory OrderModel.formJson(Map<String, dynamic> json) => OrderModel(
       id: json['id'],
       date: json['date'],
       user: json['user'],
       price: json['price'],
-      status: json['status']);
+      status: json['status'],
+      type: json['type']);
 }
