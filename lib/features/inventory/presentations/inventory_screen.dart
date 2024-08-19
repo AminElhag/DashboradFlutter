@@ -88,7 +88,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   child: Column(
                     children: [
                       Flexible(
-                        flex: 1,
+                        flex: 2,
                         child: SizedBox(
                           height: 35,
                           child: Row(
@@ -337,7 +337,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                       ),
                       const Divider(),
                       Flexible(
-                        flex: 19,
+                        flex: 20,
                         child: ListView.builder(
                           itemCount: 10,
                           scrollDirection: Axis.vertical,

@@ -28,7 +28,7 @@ class _CustomerRowState extends State<CustomerRow> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Flexible(
-            flex: 1,
+            flex: 2,
             child: SizedBox(
               width: context.width / 7,
               child: Row(
