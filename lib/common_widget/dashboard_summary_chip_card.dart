@@ -59,67 +59,85 @@ class _DashboardSummaryChipCardState extends State<DashboardSummaryChipCard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        widget.iconData,
-                        color: Theme.of(context).primaryColor,
-                      )),
-                  (widget.hasOrderChange)
-                      ? Container(
-                          decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.zero),
-                          width: 120,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: DropdownButtonFormField(
-                              isExpanded: true,
-                              focusColor: Colors.transparent,
-                              icon: const Icon(Icons.keyboard_arrow_down),
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                              ),
-                              value: selectedItem,
-                              items: widget.items.map((item) {
-                                return DropdownMenuItem<String>(
-                                  value: item,
-                                  child: Text(
-                                    item,
-                                    style: const TextStyle(fontSize: 12),
-                                  ),
-                                );
-                              }).toList(),
-                              onChanged: widget.onOrderTypeChange,
-                            ),
-                          ),
-                        )
-                      : const SizedBox(),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              Flexible(
+                flex: 1,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ValueCellWidget(
-                        frameTitle: widget.firstFrameTitle,
-                        frameValue: widget.firstFrameValue,
-                        hasValuePercentage: widget.hasFirstValueHasPercentage),
-                    ValueCellWidget(
-                        frameTitle: widget.secondFrameTitle,
-                        frameValue: widget.secondFrameValue,
-                        hasValuePercentage: widget.hasSecondValueHasPercentage),
+                    Flexible(
+                      flex: 1,
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            widget.iconData,
+                            color: Theme.of(context).primaryColor,
+                          )),
+                    ),
+                    (widget.hasOrderChange)
+                        ? Flexible(
+                      flex: 1,
+                          child: Container(
+                              decoration: const BoxDecoration(
+                                  borderRadius: BorderRadius.zero),
+                              width: 120,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: DropdownButtonFormField(
+                                  isExpanded: true,
+                                  focusColor: Colors.transparent,
+                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                  ),
+                                  value: selectedItem,
+                                  items: widget.items.map((item) {
+                                    return DropdownMenuItem<String>(
+                                      value: item,
+                                      child: Text(
+                                        item,
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: widget.onOrderTypeChange,
+                                ),
+                              ),
+                            ),
+                        )
+                        : const Flexible(flex:1,child: SizedBox()),
+                  ],
+                ),
+              ),
+              Flexible(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      flex:2,
+                      child: ValueCellWidget(
+                          frameTitle: widget.firstFrameTitle,
+                          frameValue: widget.firstFrameValue,
+                          hasValuePercentage: widget.hasFirstValueHasPercentage),
+                    ),
+                    Flexible(
+                      flex: 2,
+                      child: ValueCellWidget(
+                          frameTitle: widget.secondFrameTitle,
+                          frameValue: widget.secondFrameValue,
+                          hasValuePercentage: widget.hasSecondValueHasPercentage),
+                    ),
                     (widget.hasThirdFrame)
-                        ? ValueCellWidget(
-                            frameTitle: widget.thirdFrameTitle ?? "",
-                            frameValue: widget.thirdFrameValue ?? 0,
-                            hasValuePercentage:
-                                widget.hasThirdValueHasPercentage)
-                        : const SizedBox(),
+                        ? Flexible(
+                      flex: 2,
+                          child: ValueCellWidget(
+                              frameTitle: widget.thirdFrameTitle ?? "",
+                              frameValue: widget.thirdFrameValue ?? 0,
+                              hasValuePercentage:
+                                  widget.hasThirdValueHasPercentage),
+                        )
+                        : const Flexible(flex:0,child: SizedBox()),
                   ],
                 ),
               ),

@@ -28,36 +28,39 @@ class _CustomerRowState extends State<CustomerRow> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Flexible(
-            flex: 1,
+            flex: 2,
             child: SizedBox(
               width: context.width / 7,
               child: Row(
                 children: [
-                  Checkbox(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    value: isChecked,
-                    onChanged: (value) {
-                      setState(() {
-                        isChecked = value!;
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  SizedBox(
-                    width: context.width / 11,
-                    child: Text(
-                      widget.customer.fullName,
-                      style: textStyle,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
+                  Flexible(
+                    flex: 1,
+                    child: Checkbox(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      value: isChecked,
+                      onChanged: (value) {
+                        setState(() {
+                          isChecked = value!;
+                        });
+                      },
                     ),
                   ),
                   const SizedBox(
-                    width: 10,
+                    width: 5,
+                  ),
+                  Flexible(
+                    flex: 3,
+                    child: SizedBox(
+                      width: context.width / 11,
+                      child: Text(
+                        widget.customer.fullName,
+                        style: textStyle,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -67,28 +70,31 @@ class _CustomerRowState extends State<CustomerRow> {
             flex: 1,
             child: SizedBox(
               width: context.width / 7,
-              child: SizedBox(
-                width: 200,
-                child: Row(
-                  children: [
-                    Text(
+              child: Row(
+                children: [
+                  Flexible(
+                    flex: 3,
+                    child: Text(
                       widget.customer.email,
                       style: textStyle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(
-                      width: 6,
-                    ),
-                    InkWell(
+                  ),
+                  const SizedBox(
+                    width: 3,
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: InkWell(
                       child: const Icon(
                         Icons.file_copy_outlined,
                         size: 16,
                       ),
                       onTap: () {},
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
             ),
           ),
@@ -97,24 +103,28 @@ class _CustomerRowState extends State<CustomerRow> {
             child: SizedBox(
               width: context.width / 7,
               child: SizedBox(
-                width: 200,
+                width: 10,
                 child: Row(
                   children: [
-                    Text(
-                      widget.customer.phone,
-                      style: textStyle,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(
-                      width: 6,
-                    ),
-                    InkWell(
-                      child: const Icon(
-                        Icons.file_copy_outlined,
-                        size: 16,
+                    Flexible(
+                      flex: 3,
+                      child: Text(
+                        widget.customer.phone,
+                        style: textStyle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      onTap: () {},
+                    ),
+                    const SizedBox(width: 3,),
+                    Flexible(
+                      flex: 1,
+                      child: InkWell(
+                        child: const Icon(
+                          Icons.file_copy_outlined,
+                          size: 16,
+                        ),
+                        onTap: () {},
+                      ),
                     )
                   ],
                 ),

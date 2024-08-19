@@ -29,7 +29,7 @@ class _OrderRowState extends State<OrderRow> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Flexible(
-            flex: 1,
+            flex: 2,
             child: SizedBox(
               width: context.width / 7,
               child: Row(
@@ -45,9 +45,6 @@ class _OrderRowState extends State<OrderRow> {
                       });
                     },
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
                   SizedBox(
                     width: context.width / 11,
                     child: Text(
@@ -56,9 +53,6 @@ class _OrderRowState extends State<OrderRow> {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 10,
                   ),
                 ],
               ),
