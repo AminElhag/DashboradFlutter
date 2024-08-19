@@ -42,7 +42,7 @@ class _OrderScreenState extends State<OrderScreen> {
               height: 6,
             ),
             Flexible(
-              flex: 4,
+              flex: 5,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

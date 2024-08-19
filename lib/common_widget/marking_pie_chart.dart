@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:dashborad/common/extension.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +58,7 @@ class MarkingPieChart extends State<MarketingPieChart> {
                     show: true,
                   ),
                   sectionsSpace: 0,
-                  centerSpaceRadius: 40,
+                  centerSpaceRadius: sqrt((context.width)+(context.height)),
                   sections: showingSections(),
                 ),
               ),
@@ -69,7 +72,7 @@ class MarkingPieChart extends State<MarketingPieChart> {
   List<PieChartSectionData> showingSections() {
     return List.generate(3, (i) {
       final isTouched = i == touchedIndex;
-      final radius = isTouched ? 60.0 : 50.0;
+      final radius = isTouched ? 60.0 : sqrt((context.width)+(context.height))/2;
       final sum = widget.firstRate + widget.secondRate + widget.thirdRate;
       switch (i) {
         case 0:

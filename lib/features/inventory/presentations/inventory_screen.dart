@@ -43,12 +43,9 @@ class _InventoryScreenState extends State<InventoryScreen> {
               ),
             ),
             Flexible(
-              flex: 3,
+              flex: 5,
               child: Row(
                 children: [
-                  const SizedBox(
-                    width: 6,
-                  ),
                   DashboardSummaryChipCard(
                     items: _items,
                     flex: 3,
@@ -73,14 +70,11 @@ class _InventoryScreenState extends State<InventoryScreen> {
                     thirdFrameValue: 0,
                     onOrderTypeChange: (p0) {},
                   ),
-                  const SizedBox(
-                    width: 6,
-                  ),
                 ],
               ),
             ),
             Flexible(
-              flex: 14,
+              flex: 18,
               child: Card(
                 color: Theme.of(context).colorScheme.onPrimary,
                 child: Padding(

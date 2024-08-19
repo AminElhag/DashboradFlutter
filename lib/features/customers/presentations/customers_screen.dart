@@ -44,7 +44,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
               height: 6,
             ),
             Flexible(
-              flex: 4,
+              flex: 5,
               child: Row(
                 children: [
                   const SizedBox(
