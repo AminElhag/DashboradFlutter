@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 
 enum MonthName {
   jan(id: 1),
@@ -77,5 +78,11 @@ class DateExtension {
   static int getTheDayFromString(String string) {
     DateTime dateTime = getDateTimeFormString(string);
     return dateTime.day;
+  }
+
+  static String getFullDateFromString(String string) {
+    DateTime dateTime = getDateTimeFormString(string);
+    final dateFormat = DateFormat('dd MMM yyyy - hh:mm a');
+    return dateFormat.format(dateTime);
   }
 }

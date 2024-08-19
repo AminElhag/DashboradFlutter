@@ -1,4 +1,7 @@
+import 'package:dashborad/features/customers/presentations/customers_screen.dart';
+import 'package:dashborad/features/inventory/presentations/inventory_screen.dart';
 import 'package:dashborad/features/monitor/presentations/monitor_screen.dart';
+import 'package:dashborad/features/order/presentations/order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sidebarx/sidebarx.dart';
 
@@ -16,9 +19,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _controller = SidebarXController(selectedIndex: 0, extended: true);
   final _key = GlobalKey<ScaffoldState>();
+  final List<String> _shops = ['Nanny\'s shop', 'Amin\'s shop'];
 
   @override
   Widget build(BuildContext context) {
+    String? selectedItem = _shops.first;
     final isSmallScreen = MediaQuery.of(context).size.width < 600;
     return Scaffold(
       key: _key,
@@ -35,7 +40,76 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: const Icon(Icons.menu),
               ),
             )
-          : null,
+          : AppBar(
+              backgroundColor: Theme.of(context).colorScheme.onPrimary,
+              leading: const Column(
+                children: [
+                  Spacer(),
+                  Text(
+                    "Dashboard",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Spacer(),
+                ],
+              ),
+              leadingWidth: 100,
+              actions: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .secondaryFixed
+                          .withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(15)),
+                  width: 150,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: DropdownButtonFormField(
+                      isExpanded: true,
+                      focusColor: Colors.transparent,
+                      icon: const Icon(Icons.keyboard_arrow_down),
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                      ),
+                      value: selectedItem,
+                      items: _shops.map((item) {
+                        return DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(item),
+                        );
+                      }).toList(),
+                      onChanged: (newValue) {
+                        setState(() {
+                          selectedItem = newValue;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.notifications,
+                      color: Theme.of(context).colorScheme.primary,
+                    )),
+                const SizedBox(
+                  width: 6,
+                ),
+                const SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: CircleAvatar(
+                    radius: 20.0,
+                    backgroundImage: NetworkImage(
+                      'https://picsum.photos/id/237/300/300',
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 6,
+                ),
+              ],
+            ),
       drawer: ExampleSidebarX(controller: _controller),
       body: Row(
         children: [
@@ -322,6 +396,12 @@ class _SelectScreens extends StatelessWidget {
         switch (controller.selectedIndex) {
           case 0:
             return const MonitorScreen();
+          case 1:
+            return const OrderScreen();
+          case 2:
+            return const CustomersScreen();
+          case 3:
+            return const InventoryScreen();
           default:
             return Scaffold(
               appBar: AppBar(
