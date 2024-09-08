@@ -53,6 +53,8 @@ dependencies:
   provider: ^6.1.1
   sidebarx: ^0.17.1
   fl_chart: ^0.68.0
+  dotted_border: ^2.1.0
+  flutter_quill: ^10.5.0
 
 dev_dependencies:
   flutter_test:

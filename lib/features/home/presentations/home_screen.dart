@@ -1,5 +1,5 @@
 import 'package:dashborad/features/customers/presentations/customers_screen.dart';
-import 'package:dashborad/features/inventory/presentations/inventory_screen.dart';
+import 'package:dashborad/features/inventory/presentations/inventory_monitor_screen.dart';
 import 'package:dashborad/features/monitor/presentations/monitor_screen.dart';
 import 'package:dashborad/features/order/presentations/order_screen.dart';
 import 'package:flutter/material.dart';
@@ -401,7 +401,7 @@ class _SelectScreens extends StatelessWidget {
           case 2:
             return const CustomersScreen();
           case 3:
-            return const InventoryScreen();
+            return const InventoryMonitoryScreen();
           default:
             return Scaffold(
               appBar: AppBar(

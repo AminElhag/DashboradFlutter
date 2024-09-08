@@ -57,7 +57,8 @@ class ProductModel {
   final String name;
   final List<String> images;
   final String category;
-  final double price;
+  final double sellingPrice;
+  final double costPrice;
   final double inStock;
   final double discount;
   final int status;
@@ -67,7 +68,8 @@ class ProductModel {
     required this.name,
     required this.images,
     required this.category,
-    required this.price,
+    required this.sellingPrice,
+    required this.costPrice,
     required this.inStock,
     required this.discount,
     required this.status,
@@ -78,7 +80,8 @@ class ProductModel {
         name: json['name'],
         images: json['images'],
         category: json['category'],
-        price: json['price'],
+        sellingPrice: json['selling_price'],
+        costPrice: json['cost_price'],
         inStock: json['in_stock'],
         discount: json['discount'],
         status: json['status'],

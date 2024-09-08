@@ -22,7 +22,7 @@ class _ProductRowState extends State<ProductRow> {
   @override
   Widget build(BuildContext context) {
     final double totalValue =
-        (widget.product.inStock * widget.product.price).roundToDouble();
+        (widget.product.inStock * widget.product.sellingPrice).roundToDouble();
     String selectedItem = ProductStatus.getStatus(widget.product.status);
     return SizedBox(
       width: context.width,
@@ -91,7 +91,7 @@ class _ProductRowState extends State<ProductRow> {
             child: SizedBox(
               width: context.width / 8,
               child: Text(
-                "${widget.product.price}\$",
+                "${widget.product.sellingPrice}\$",
                 style: textStyle,
                 maxLines: 1,
               ),
